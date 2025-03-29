@@ -1,4 +1,19 @@
 <script setup>
+import { ref } from 'vue'
+import HomeView from './components/HomeView.vue';
+import AboutView from './components/AboutView.vue';
+
+const message = ref('')
+const greeting = (newMessage) => {
+  message.value = newMessage
+}
+
+const childRef = ref(null)
+const triggerChildEvent = () => {
+  if (childRef.value) {
+    childRef.value.childMethod()
+  }
+}
 // import HelloWorld from './components/HelloWorld.vue'
 // import TheWelcome from './components/TheWelcome.vue'
 </script>
@@ -13,8 +28,12 @@
   </header> -->
 
   <main>
-    <!-- <TheWelcome /> -->
-    <RouterView />  
+     <HomeView v-on:custom-event="greeting"/>
+
+     <p>{{ message }}</p>
+     
+     <AboutView ref="childRef" />
+     <button v-on:click="triggerChildEvent">親から子コンポーネントを操作</button>
   </main>
 </template>
 
