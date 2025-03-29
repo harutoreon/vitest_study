@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { mount, RouterLinkStub } from '@vue/test-utils'
 import HomeView from '@/components/HomeView.vue'
-import AboutView from '@/components/AboutView.vue'
 import App from '@/App.vue'
+import router from '@/router'
 
 // Component test
 
@@ -117,5 +117,23 @@ describe('HomeView', () => {
 
       expect(wrapper.html()).toContain('親からのイベントを受け取りました!')
     })
+  })
+})
+
+// E2E test
+
+describe('ルーティング', () => {
+  it('Aboutページに遷移できること', async () => {
+    router.push('/about')
+  
+    await router.isReady()
+  
+    const wrapper = mount(App, {
+      global: {
+        plugins: [router]
+      }
+    })
+  
+    expect(wrapper.html()).toContain('About')
   })
 })
