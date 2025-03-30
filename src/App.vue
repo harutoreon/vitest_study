@@ -1,23 +1,43 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue'
+import HomeView from './components/HomeView.vue';
+import AboutView from './components/AboutView.vue';
+
+const message = ref('')
+const greeting = (newMessage) => {
+  message.value = newMessage
+}
+
+const childRef = ref(null)
+const triggerChildEvent = () => {
+  if (childRef.value) {
+    childRef.value.childMethod()
+  }
+}
+// import HelloWorld from './components/HelloWorld.vue'
+// import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <header>
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
     </div>
-  </header>
+  </header> -->
 
   <main>
-    <TheWelcome />
+     <HomeView v-on:custom-event="greeting"/>
+
+     <p>{{ message }}</p>
+     
+     <AboutView ref="childRef" />
+     <button v-on:click="triggerChildEvent">親から子コンポーネントを操作</button>
   </main>
 </template>
 
-<style scoped>
+<!-- <style scoped>
 header {
   line-height: 1.5;
 }
@@ -44,4 +64,4 @@ header {
     flex-wrap: wrap;
   }
 }
-</style>
+</style> -->
