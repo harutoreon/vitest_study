@@ -40,7 +40,12 @@ describe('settledResults', () => {
     )
 
     const promise = slow()
-    expect(slow.mock.settledResults).toEqual([])
+    expect(slow.mock.settledResults).toEqual([
+      {
+        type: 'incomplete',
+			  value: undefined,
+      }
+    ])
 
     await promise
 

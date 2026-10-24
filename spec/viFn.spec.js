@@ -1,5 +1,4 @@
 import { describe, it, expect, vi } from 'vitest'
-import {a} from "vitest/dist/chunks/suite.qtkXWc6R.d.ts";
 
 describe('viFn', () => {
   it('呼び出しを記録する', () => {
